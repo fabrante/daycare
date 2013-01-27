@@ -61,6 +61,7 @@ return array(
         'exception_template' => 'error/index',
 
         'template_map' => array(
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'error/index'    => __DIR__ . '/../view/rest/error/index.phtml',
             'error/404'     => __DIR__ . '/../view/rest/error/404.phtml',
         ),
