@@ -1,0 +1,11 @@
+hola
+
+<table>
+<?php foreach ($users as $user) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($user->getName());?></td>
+    <td><?php echo $this->escapeHtml($user->getDescription());?></td>
+
+</tr>
+<?php endforeach; ?>
+</table>
