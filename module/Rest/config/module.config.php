@@ -10,7 +10,7 @@ return array(
             'User' => 'Rest\Controller\UserController',
         ),
     ),
-
+/*
     'service_manager' => array(
         'factories' => array(
             'RestUser' =>  function($sm) {
@@ -28,32 +28,37 @@ return array(
         ),
     ),
 
+*/
     'router' => array(
         'routes' => array(
             'rest' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/rest/',
+                    'defaults' => array(
+                        'controller' => 'Index',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            /*
+            'rest' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/rest/:controller[/:id]',
+                    'route' => '/rest/[:controller[/:id]]',
                     'constraints' => array(
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[a-zA-Z0-9_-]*'
                     ),
                 ),
-            ),
-            'home' => array(
-                'type'  => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/',
-                    'defaults' => array(
-                        'controller' => 'Index',
-                        'action' => 'index',
-                    ),
-                ),
-            ),
+            )
+            */
         ),
     ),
 
-    'view_manager' => array(
+
+    'view_manager' => array (
+        /*
         'doctype' => 'HTML5',
         'display_not_found_reason' => true,
         'display_exceptions' => true,
@@ -65,11 +70,15 @@ return array(
             'error/index'    => __DIR__ . '/../view/rest/error/index.phtml',
             'error/404'     => __DIR__ . '/../view/rest/error/404.phtml',
         ),
+        */
         'template_path_stack' => array(
             'rest' => __DIR__ . '/../view',
         ),
+        /*
         'strategies' => array(
             'ViewJsonStrategy',
         ),
+    */
     ),
+
 );

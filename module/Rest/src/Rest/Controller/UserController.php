@@ -3,9 +3,13 @@ namespace Rest\Controller;
 
 use Zend\View\Model\JsonModel;
 
-class UserController extends AbstractRestController
+class UserController //extends AbstractRestController
 {
     protected $defaultServiceName = "UserService";
+
+    public function index() {
+
+    }
 
     /**
      * Create a new resource
