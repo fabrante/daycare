@@ -10,7 +10,6 @@ return array(
             'User' => 'Rest\Controller\UserController',
         ),
     ),
-/*
     'service_manager' => array(
         'factories' => array(
             'RestUser' =>  function($sm) {
@@ -27,12 +26,11 @@ return array(
             'UserService' => 'Rest\Service\UserService',
         ),
     ),
-
-*/
     'router' => array(
         'routes' => array(
-            'rest' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+
+            'restHome' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
                     'route'    => '/rest/',
                     'defaults' => array(
@@ -41,18 +39,16 @@ return array(
                     ),
                 ),
             ),
-            /*
             'rest' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/rest/[:controller[/:id]]',
+                    'route' => '/rest[/:controller[/:id]]',
                     'constraints' => array(
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[a-zA-Z0-9_-]*'
                     ),
                 ),
             )
-            */
         ),
     ),
 
