@@ -5,7 +5,7 @@ use Rest\Controller\AbstractSecureController;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 
-abstract class AbstractRestController extends AbstractRestfulController
+abstract class AbstractRestController extends AbstractSecureController
 {
     protected $defaultServiceName;
     protected $defaultService;

@@ -2,7 +2,6 @@
 namespace Rest\Controller;
 
 use Zend\View\Model\JsonModel;
-use Zend\Mvc\Controller\AbstractActionController;
 
 class UserController extends AbstractRestController
 {

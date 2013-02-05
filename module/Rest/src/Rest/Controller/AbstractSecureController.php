@@ -15,7 +15,7 @@ abstract class AbstractSecureController extends AbstractRestfulController
         $valid = $this->validateHash($this->getEvent()->getRouteMatch()->getParam("controller"),
                             $request->getMethod(),
                             $this->getEvent()->getRouteMatch()->getParam("id"),
-                            $request->getHeader("Authorization"),
+                            $request->getHeaders()->get("authorization"),
                             $request->getPost()->toArray());
 
         if ($valid) {
@@ -42,6 +42,7 @@ abstract class AbstractSecureController extends AbstractRestfulController
             $timeStamp = $authHeaderArr[1];
             $hash = $authHeaderArr[2];
 
+            date_default_timezone_set('UTC');
             $utc_str = gmdate("M d Y H:i:s", time());
             $timeStampLocal = strtotime($utc_str);
             //var_dump($timeStampLocal);
