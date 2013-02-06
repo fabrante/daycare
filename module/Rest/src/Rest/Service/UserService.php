@@ -15,4 +15,14 @@ class UserService extends AbstractService
         }
         return null;
     }
+
+    public function getUserLogin($userName) {
+        try {
+            return $this->getModel()->getUserLogin($userName);
+        }
+        catch (\Exception $e) {
+            error_log($e);
+        }
+        return null;
+    }
 }

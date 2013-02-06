@@ -17,4 +17,13 @@ class UserTable extends AbstractTable
 
         $this->initialize();
     }
+
+    public function getUserLogin($userName) {
+
+        $row = $this->select(array("email" => $userName))->current();
+        if (!$row) {
+            throw new \Exception("Could not find apiKey: $userName");
+        }
+        return $row;
+    }
 }

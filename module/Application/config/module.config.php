@@ -10,7 +10,8 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Index' => 'Application\Controller\IndexController',
+            'LoginApp' => 'Application\Controller\LoginController'
         ),
     ),
     'router' => array(
@@ -20,12 +21,12 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Index',
                         'action'     => 'index',
                     ),
                 ),
             ),
-            /*
+
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -33,7 +34,7 @@ return array(
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/application',
+                    'route'    => '/app',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
@@ -56,7 +57,7 @@ return array(
                     ),
                 ),
             ),
-            */
+
         ),
     ),
     'service_manager' => array(

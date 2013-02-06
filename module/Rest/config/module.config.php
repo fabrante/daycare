@@ -8,6 +8,7 @@ return array(
         'invokables' => array(
             'Index' => 'Rest\Controller\IndexController',
             'User' => 'Rest\Controller\UserController',
+            'Login' => 'Rest\Controller\LoginController',
         ),
     ),
     'service_manager' => array(
@@ -45,7 +46,7 @@ return array(
                     'route' => '/rest[/:controller[/:id]]',
                     'constraints' => array(
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[a-zA-Z0-9_-]*'
+                        'id' => '[a-zA-Z0-9._-|@]*'
                     ),
                 ),
             )
