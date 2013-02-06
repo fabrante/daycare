@@ -10,8 +10,8 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Index' => 'Application\Controller\IndexController',
-            'LoginApp' => 'Application\Controller\LoginController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Login' => 'Application\Controller\LoginController'
         ),
     ),
     'router' => array(
@@ -21,7 +21,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Index',
+                        'controller' => 'Application\Controller\Login',
                         'action'     => 'index',
                     ),
                 ),
