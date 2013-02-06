@@ -11,7 +11,7 @@ class RestUserService extends AbstractService
             return $this->getModel()->getRestUserByApiKey($apiKey);
         }
         catch (\Exception $e) {
-            error_log($e);
+            //error_log($e);
         }
         return null;
     }

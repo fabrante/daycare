@@ -2,6 +2,7 @@
 
 namespace Rest\Model;
 
+use Zend\Db\Sql\Select;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 
@@ -19,7 +20,12 @@ class RestUserTable extends AbstractTable
     }
 
     public function getRestUserByApiKey($apiKey) {
-        $row = $this->select(array("apiKey" => $apiKey))->current();
+
+        $rowSet = $this->select(function (Select $select) use ($apiKey) {
+            $select->where->equalTo("apiKey", $apiKey);
+            $select->where->equalTo("active", 1);
+        });
+        $row = $rowSet->current();
         if (!$row) {
             throw new \Exception("Could not find apiKey: $apiKey");
         }

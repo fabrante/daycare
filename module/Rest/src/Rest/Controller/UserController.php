@@ -15,7 +15,7 @@ class UserController extends AbstractRestController
      */
     public function create($data)
     {
-        error_log("create $data");
+        error_log("create");
         // TODO: Implement create() method.
     }
 

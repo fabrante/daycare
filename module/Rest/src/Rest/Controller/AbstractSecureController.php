@@ -17,6 +17,8 @@ abstract class AbstractSecureController extends AbstractRestfulController
                             $this->getEvent()->getRouteMatch()->getParam("id"),
                             $request->getHeaders()->get("authorization"),
                             $request->getPost()->toArray());
+        //definir variable global para activar y desactivar seguridad por configuracion
+        $valid = true;
 
         if ($valid) {
             //redirijo al controllador para seguir con las operaciones
@@ -38,21 +40,23 @@ abstract class AbstractSecureController extends AbstractRestfulController
 
         if ($authHeader) {
             $authHeaderArr = explode(",", $authHeader->getFieldValue());
-            $apiKey = $authHeaderArr[0];
-            $timeStamp = $authHeaderArr[1];
-            $hash = $authHeaderArr[2];
+            if (count($authHeaderArr) == 3) {
+                $apiKey = $authHeaderArr[0];
+                $timeStamp = $authHeaderArr[1];
+                $hash = $authHeaderArr[2];
 
-            date_default_timezone_set('UTC');
-            $utc_str = gmdate("M d Y H:i:s", time());
-            $timeStampLocal = strtotime($utc_str);
-            //var_dump($timeStampLocal);
-            //valido que la peticion no se haya realizado hace mas de 5 minutos (60*5 = 300)
-            if ($timeStampLocal-$timeStamp < 300) {
-                $user = $this->getRestUserService()->getRestUserByApiKey($apiKey);
-                if ($user != null) {
-                    $hashDb = $this->createHash($controller, $method, $id, $timeStamp, $data, $user->getSecretKey());
-                    if ($hashDb == $hash) {
-                        return true;
+                date_default_timezone_set('UTC');
+                $utc_str = gmdate("M d Y H:i:s", time());
+                $timeStampLocal = strtotime($utc_str);
+
+                //valido que la peticion no se haya realizado hace mas de 5 minutos (60*5 = 300)
+                if ($timeStampLocal-$timeStamp < 300) {
+                    $user = $this->getRestUserService()->getRestUserByApiKey($apiKey);
+                    if ($user != null) {
+                        $hashDb = $this->createHash($controller, $method, $id, $timeStamp, $data, $user->getSecretKey());
+                        if ($hashDb == $hash) {
+                            return true;
+                        }
                     }
                 }
             }
