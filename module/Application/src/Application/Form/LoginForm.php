@@ -45,5 +45,4 @@ class LoginForm extends Form
         ));
 
     }
-
 }
