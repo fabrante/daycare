@@ -3,6 +3,21 @@ body {
     padding-bottom: 40px;
 }
 
+li {
+    list-style: none;
+}
+
+
+
+
+
+
+
+
+
+
+/*  Elimiar a partir de aqui que esto es del skeleton de ZF2*/
+
 .zf-green {
     color: #68b604;
 }
