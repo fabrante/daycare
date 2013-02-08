@@ -13,6 +13,7 @@ class LoginForm extends Form
         parent::__construct('login');
 
         $this->setAttribute('method', 'post');
+        $this->setAttribute('action', '/login/login');
 
         $this->add(array(
             'name' => 'userName',
