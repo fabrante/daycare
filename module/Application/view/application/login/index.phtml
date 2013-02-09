@@ -1,9 +1,13 @@
+<?php
+    $form = $this->form;
+?>
+
 <div>
-    <form name="loginForm" action="/login/login">
+    <?php echo $this->form()->openTag($form); ?>`
         <ul>
-            <li><label for="userName">Usuario</label><input type="text" name="userName" id="userName"></li>
-            <li><label for="password">Password</label><input type="text" name="password" id="password"></li>
-            <li><input type="submit" value="Log in" name="logIn"></li>
+            <li><?php echo $this->formRow($form->get('userName')); ?></li>
+            <li><?php echo $this->formRow($form->get('userPassword')); ?></li>
+            <li><?php echo $this->formElement($form->get('submit')) ?></li>
         </ul>
-    </form>
+    <?php echo $this->form()->closeTag() ?>
 </div>

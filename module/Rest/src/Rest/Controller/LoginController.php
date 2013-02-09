@@ -7,6 +7,7 @@ class LoginController extends UserController
 {
     public function get($id)
     {
+        error_log("login rest");
         $object = $this->getDefaultService()->getUserLogin($id);
         if ($object != null) {
 

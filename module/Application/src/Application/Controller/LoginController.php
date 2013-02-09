@@ -16,28 +16,42 @@ class LoginController extends AbstractActionController
 
 
 
-        return new ViewModel();
+        return array('form' => $form);
     }
 
     public function loginAction()
     {
-        $client = new Client();
-        $client->setAdapter('Zend\Http\Client\Adapter\Curl');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form  = new LoginForm();
+            $form->setData($request->getPost());
 
-        $client->setUri('http://www.prueba.com/rest/login');
-        $client->setMethod('GET');
+            if ($form->isValid()) {
+                $arrData = $form->getData();
 
-        var_dump($this->getForm());
-        $client->setParameterPost($this->getRequest()->getPost()->toArray());
+                $client = new Client();
+                $client->setAdapter('Zend\Http\Client\Adapter\Curl');
+                $client->setUri('http://www.daycaregit.dev/rest/login');
+                $client->setMethod('GET');
+                $client->setHeaders(array('content-type' => 'multipart/form-data'));
 
-        $response = $client->send();
-        if (!$response->isSuccess()) {
-            // report failure
-            $message = $response->getStatusCode() . ': ' . $response->getReasonPhrase();
+                $client->setParameterGet(array('id' => $arrData['userName']));
 
-            $response = $this->getResponse();
-            $response->setContent($message);
-            return $response;
+
+                $response = $client->send();
+                if (!$response->isSuccess()) {
+                    //var_dump($response);
+                    // report failure
+                    $message = $response->getStatusCode() . ': ' . $response->getReasonPhrase();
+
+                    $response = $this->getResponse();
+                    $response->setContent($message);
+                    return $response;
+                }
+
+                $body = $response->getBody();
+                var_dump($body);
+            }
         }
 
     }
