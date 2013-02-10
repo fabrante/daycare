@@ -13,12 +13,13 @@ class LoginForm extends Form
         parent::__construct('login');
 
         $this->setAttribute('method', 'post');
-        $this->setAttribute('action', '/login/login');
+        $this->setAttribute('action', '/login');
 
         $this->add(array(
             'name' => 'userName',
+            'required' => true,
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'Zend\Form\Element\Email',
             ),
             'options' => array(
                 'label' => 'Usuario',
@@ -44,6 +45,5 @@ class LoginForm extends Form
                 'id' => 'submitbutton',
             ),
         ));
-
     }
 }

@@ -10,8 +10,6 @@ class LoginController extends UserController
         error_log("login rest");
         $object = $this->getDefaultService()->getUserLogin($id);
         if ($object != null) {
-
-
             return new JsonModel(array($object->toArray()));
         }
         else {
