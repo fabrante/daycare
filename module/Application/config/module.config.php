@@ -14,6 +14,11 @@ return array(
             'Application\Controller\Login' => 'Application\Controller\LoginController'
         ),
     ),
+    'service_manager' => array(
+        'factories' => array(
+            'RestUserService' => 'Application\Service\RestService',
+        ),
+    ),
     'router' => array(
         'routes' => array(
             'home' => array(
