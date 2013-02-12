@@ -29,9 +29,10 @@ class LoginController extends AbstractActionController
                 $arrData = $form->getData();
 
                 $restService = new RestService();
-                $restService->setGetParameters(array('id' => $arrData['userName']));
+                $restService->setPostParameters(array('user' => $arrData['userName'],
+                                                      'pass' => $arrData['userPassword']));
 
-                $restService->call($request, $response, 'rest/login');
+                $restService->call($request, 'POST', 'rest/login');
             }
             else {
 

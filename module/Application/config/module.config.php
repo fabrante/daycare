@@ -16,6 +16,8 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
+            'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+
             'RestUserService' => 'Application\Service\RestService',
         ),
     ),
@@ -65,12 +67,7 @@ return array(
 
         ),
     ),
-    'service_manager' => array(
-        'factories' => array(
-            'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
-        ),
-    ),
-    'translator' => array(
+     'translator' => array(
         'locale' => 'en_US',
         'translation_file_patterns' => array(
             array(

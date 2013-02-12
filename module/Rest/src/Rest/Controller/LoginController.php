@@ -5,10 +5,10 @@ use Zend\View\Model\JsonModel;
 
 class LoginController extends UserController
 {
-    public function get($id)
+    public function create($data)
     {
-        error_log("login rest");
-        $object = $this->getDefaultService()->getUserLogin($id);
+        var_dump($data);
+        $object = $this->getDefaultService()->getUserLogin($data['user'], $data['pass']);
         if ($object != null) {
             return new JsonModel(array($object->toArray()));
         }

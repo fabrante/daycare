@@ -13,7 +13,6 @@ class RestService extends AbstractService
     {
         $this->client = new Client();
         $this->client->setAdapter('Zend\Http\Client\Adapter\Curl');
-        $this->client->setHeaders(array('content-type' => 'multipart/form-data'));
         $this->client->setOptions(array(
             'maxredirects' => 0,
             'timeout'      => 100
@@ -21,31 +20,32 @@ class RestService extends AbstractService
 
     }
 
-    public function call($request, $response, $url) {
+    public function call($request, $method, $url) {
 
-        $server = $request->getRequestUri();
-        error_log($server);
-        $this->client->setUri($server + $url);
+        $this->client->setMethod($method);
+        $this->client->setUri('http://' . $request->getServer('HTTP_HOST') . '/' . $url);
 
         $response = $this->client->send();
         if (!$response->isSuccess()) {
-
+            error_log("error login");
             // report failure
             $message = $response->getStatusCode() . ': ' . $response->getReasonPhrase();
             $response->setContent($message);
             return $response;
 
         }
+        else {
+            error_log("success");
+        }
         return $response->getBody();
     }
 
     public function setGetParameters($arrData) {
-        $this->client->setMethod('GET');
+        $this->client->setHeaders(array('content-type' => 'multipart/form-data'));
         $this->client->setParameterGet($arrData);
     }
 
     public function setPostParameters($arrData) {
-        $this->client->setMethod('POST');
         $this->client->setParameterPost($arrData);
     }
 

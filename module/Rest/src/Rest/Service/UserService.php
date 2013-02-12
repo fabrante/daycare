@@ -16,9 +16,9 @@ class UserService extends AbstractService
         return null;
     }
 
-    public function getUserLogin($userName) {
+    public function getUserLogin($userName, $passHash) {
         try {
-            return $this->getModel()->getUserLogin($userName);
+            return $this->getModel()->getUserLogin($userName, $passHash);
         }
         catch (\Exception $e) {
             error_log($e);

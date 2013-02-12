@@ -4,6 +4,7 @@ namespace Rest\Model;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Sql\Select;
 
 class UserTable extends AbstractTable
 {
@@ -18,11 +19,16 @@ class UserTable extends AbstractTable
         $this->initialize();
     }
 
-    public function getUserLogin($userName) {
+    public function getUserLogin($userName, $passHash) {
 
-        $row = $this->select(array("email" => $userName))->current();
+        $rowSet = $this->select(function (Select $select) use ($userName, $passHash) {
+            $select->where->equalTo("email", $userName);
+            $select->where->equalTo("password", $passHash);
+        });
+        $row = $rowSet->current();
+
         if (!$row) {
-            throw new \Exception("Could not find apiKey: $userName");
+            throw new \Exception("Could not find userName: $userName");
         }
         return $row;
     }
