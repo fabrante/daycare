@@ -28,7 +28,7 @@ class UserTable extends AbstractTable
         $row = $rowSet->current();
 
         if (!$row) {
-            throw new \Exception("Could not find userName: $userName");
+            //throw new \Exception("Could not find userName: $userName");
         }
         return $row;
     }

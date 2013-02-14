@@ -45,9 +45,7 @@ abstract class AbstractSecureController extends AbstractRestfulController
                 $timeStamp = $authHeaderArr[1];
                 $hash = $authHeaderArr[2];
 
-                date_default_timezone_set('UTC');
-                $utc_str = gmdate("M d Y H:i:s", time());
-                $timeStampLocal = strtotime($utc_str);
+                $timeStampLocal = $this->createTimeStamp();
 
                 //valido que la peticion no se haya realizado hace mas de 5 minutos (60*5 = 300)
                 if ($timeStampLocal-$timeStamp < 300) {
@@ -62,6 +60,12 @@ abstract class AbstractSecureController extends AbstractRestfulController
             }
         }
         return false;
+    }
+
+    private function createTimeStamp() {
+        date_default_timezone_set('UTC');
+        $utc_str = gmdate("M d Y H:i:s", time());
+        return strtotime($utc_str);
     }
 
     private function createHash($controller, $method, $id, $timeStamp, array $data, $secretKey) {
