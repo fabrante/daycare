@@ -3,6 +3,7 @@
 namespace Application\Service;
 
 use Zend\Http\Client;
+use Zend\Crypt\Hmac;
 
 class RestService extends AbstractService
 {
@@ -16,22 +17,26 @@ class RestService extends AbstractService
     private $apiKey = "prueba1";
     private $secretKey = "secretKey";
 
-    function __construct()
+
+    function __construct($arrData, $method, $url)
     {
+        $this->arrData = $arrData;
+        $this->method = $method;
+        $this->url = $url;
+
         $this->client = new Client();
         $this->client->setAdapter('Zend\Http\Client\Adapter\Curl');
         $this->client->setOptions(array(
             'maxredirects' => 0,
             'timeout'      => 100
         ));
-
     }
 
-    public function call($request, $url) {
+    public function call($request) {
 
         if ($this->getMethod() == 'GET') $this->setGetParameters(); else $this->setPostParameters();
         $this->client->setMethod($this->getMethod());
-        $this->client->setUri('http://' . $request->getServer('HTTP_HOST') . '/' . $url);
+        $this->client->setUri('http://' . $request->getServer('HTTP_HOST') . '/' . $this->getUrl());
         $this->securityCall();
 
         $response = $this->client->send();
@@ -89,10 +94,9 @@ class RestService extends AbstractService
         $timeStamp = $this->createTimeStamp();
         $hash = $this->createHash($this->getUrl(), $this->getMethod(), "", $timeStamp, $this->getArrData(), $this->secretKey);
 
-        error_log($hash);
-        //$this->client->setHeaders(array("authorization" => $this->apiKey . ',' .
-        //                                                   $timeStamp . ',' .
-        //                                                   $hash));
+        $this->client->setHeaders(array("authorization" => $this->apiKey . ',' .
+                                                           $timeStamp . ',' .
+                                                           $hash));
     }
 
     private function createTimeStamp() {
