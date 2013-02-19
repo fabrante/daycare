@@ -17,8 +17,8 @@ abstract class AbstractSecureController extends AbstractRestfulController
                             $this->getEvent()->getRouteMatch()->getParam("id"),
                             $request->getHeaders()->get("authorization"),
                             $request->getPost()->toArray());
-        //definir variable global para activar y desactivar seguridad por configuracion
-        $valid = true;
+        //TODO: definir variable global para activar y desactivar seguridad por configuracion
+        //$valid = true;
 
         if ($valid) {
             //redirijo al controllador para seguir con las operaciones
@@ -69,7 +69,8 @@ abstract class AbstractSecureController extends AbstractRestfulController
     }
 
     private function createHash($controller, $method, $id, $timeStamp, array $data, $secretKey) {
-        $str = $controller . $method;
+        //TODO: mejorar esto, sacar el nombre del modulo de otro lado
+        $str = "rest/".$controller . $method;
         if ($id != null) $str .= $id;
         if ($timeStamp != null) $str .= $timeStamp; else return null;
 
@@ -78,9 +79,7 @@ abstract class AbstractSecureController extends AbstractRestfulController
         foreach($data as $key => $value) {
             $str .= "$key=$value";
         }
-        $hmac = Hmac::compute($secretKey,"sha256", $str, Hmac::OUTPUT_STRING);
-        //var_dump($hmac);
-        return $hmac;
+        return Hmac::compute($secretKey,"sha256", $str, Hmac::OUTPUT_STRING);
     }
 
     public function noAuthorizedAction(Response $response) {

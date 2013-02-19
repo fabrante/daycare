@@ -7,8 +7,7 @@ class LoginController extends UserController
 {
     public function create($data)
     {
-        var_dump($data);
-        $object = $this->getDefaultService()->getUserLogin($data['user'], $data['pass']);
+        $object = $this->getDefaultService()->getUserLogin($data["userName"], $data["userPassword"]);
         if ($object != null) {
             return new JsonModel(array($object->toArray()));
         }

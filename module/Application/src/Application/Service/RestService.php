@@ -3,6 +3,7 @@
 namespace Application\Service;
 
 use Zend\Http\Client;
+use Zend\Http\Headers;
 use Zend\Crypt\Hmac;
 
 class RestService extends AbstractService
@@ -13,7 +14,7 @@ class RestService extends AbstractService
     private $url;
     private $method;
 
-    //hacer que esta apiKey y secretKey sean variables globales por configuracion
+    //TODO: hacer que esta apiKey y secretKey sean variables globales por configuracion
     private $apiKey = "prueba1";
     private $secretKey = "secretKey";
 
@@ -47,6 +48,7 @@ class RestService extends AbstractService
             return $response;
 
         }
+        var_dump($response->getBody());
         return $response->getBody();
     }
 
@@ -94,9 +96,13 @@ class RestService extends AbstractService
         $timeStamp = $this->createTimeStamp();
         $hash = $this->createHash($this->getUrl(), $this->getMethod(), "", $timeStamp, $this->getArrData(), $this->secretKey);
 
-        $this->client->setHeaders(array("authorization" => $this->apiKey . ',' .
-                                                           $timeStamp . ',' .
-                                                           $hash));
+        $headers = new Headers();
+        $headers->addHeaderLine("authorization" , $this->apiKey . ',' .
+                                                $timeStamp . ',' .
+                                                $hash);
+
+        $this->client->setHeaders($headers);
+        $this->client->getHeader("authorization");
     }
 
     private function createTimeStamp() {
