@@ -29,7 +29,17 @@ class LoginController extends AbstractActionController
                 $arrData = $form->getData();
 
                 $restService = new RestService($arrData, 'POST', 'rest/login');
-                $restService->call($request);
+                $response = $restService->call($request);
+
+                if ($response->getStatusCode() == 200) {
+                    error_log("login success");
+                }
+                else {
+                    //TODO: internacionalizar
+                    $form->setMessages(array(
+                        'userName' => array("Usuario o Password invalido")
+                    ));
+                }
             }
             else {
 

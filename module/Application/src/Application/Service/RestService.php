@@ -45,11 +45,8 @@ class RestService extends AbstractService
             // report failure
             $message = $response->getStatusCode() . ': ' . $response->getReasonPhrase();
             $response->setContent($message);
-            return $response;
-
         }
-        var_dump($response->getBody());
-        return $response->getBody();
+        return $response;
     }
 
     public function setGetParameters() {
