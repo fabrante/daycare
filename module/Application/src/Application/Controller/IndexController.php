@@ -18,15 +18,13 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        /*
+
         $loginService = new LoginService();
-        $loginService->logout();
 
         if (!$loginService->isLoggedIn()) {
-            return $this->redirect()->toRoute('home', array('controller' => 'login',
-                                                                'action' => 'index'));
+            return $this->redirect()->toUrl('/login');
         }
-        */
+
 
         return new ViewModel();
     }

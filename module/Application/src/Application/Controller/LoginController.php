@@ -30,7 +30,7 @@ class LoginController extends AbstractActionController
 
                 $loginService = new LoginService();
                 if ($loginService->login($arrData['userName'], $arrData['userPassword'], $request)) {
-                    return $this->redirect()->toRoute('index');
+                    return $this->redirect()->toUrl('/');
                 }
                 else {
                     //TODO: internacionalizar
