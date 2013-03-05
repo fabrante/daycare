@@ -4,10 +4,6 @@
 
 <div>
     <?php echo $this->form()->openTag($form); ?>
-        <ul>
-            <li><?php echo $this->formRow($form->get('userName')); ?></li>
-            <li><?php echo $this->formRow($form->get('userPassword')); ?></li>
-            <li><?php echo $this->formElement($form->get('submit')) ?></li>
-        </ul>
+    <?php echo $this->formCollection($form); ?>
     <?php echo $this->form()->closeTag() ?>
 </div>

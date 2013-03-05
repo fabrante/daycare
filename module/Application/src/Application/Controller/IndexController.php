@@ -12,10 +12,22 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+use Application\Service\LoginService;
+
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        /*
+        $loginService = new LoginService();
+        $loginService->logout();
+
+        if (!$loginService->isLoggedIn()) {
+            return $this->redirect()->toRoute('home', array('controller' => 'login',
+                                                                'action' => 'index'));
+        }
+        */
+
         return new ViewModel();
     }
 }
