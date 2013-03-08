@@ -9,13 +9,9 @@ use Zend\View\Model\ViewModel;
 use Application\Model\User;
 use Application\Service\LoginService;
 
-//http://samsonasik.wordpress.com/2012/10/23/zend-framework-2-create-login-authentication-using-authenticationservice-with-rememberme/
-//http://framework.zend.com/manual/2.0/en/modules/zend.authentication.intro.html
-
 class LoginController extends AbstractActionController
 {
     protected $form;
-
 
     public function indexAction()
     {
@@ -43,7 +39,13 @@ class LoginController extends AbstractActionController
         return array('form' => $form);
     }
 
-    public function getForm()
+    public function logoutAction() {
+        $loginService = new LoginService();
+        $loginService->logout();
+        return $this->redirect()->toUrl('/');
+    }
+
+    private function getForm()
     {
         if (! $this->form) {
             $user       = new User();
@@ -53,4 +55,6 @@ class LoginController extends AbstractActionController
 
         return $this->form;
     }
+
+
 }

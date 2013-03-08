@@ -9,34 +9,42 @@ use Application\Service\AuthAdapter;
 
 class LoginService
 {
+    private $authAdapter;
+
+
+    function __construct()
+    {
+        $this->authAdapter = new AuthAdapter();;
+    }
 
     public function login($userName, $password, $request) {
 
-        $authAdapter = new AuthAdapter();
-        $authAdapter->setFields($userName, $password, $request);
-        $result = $authAdapter->authenticate();
+        $this->authAdapter->setFields($userName, $password, $request);
+        $result = $this->authAdapter->authenticate();
 
-        if ($authAdapter->hasIdentity()) {
-            $authAdapter->clearIdentity();
+        if ($this->authAdapter->hasIdentity()) {
+            $this->authAdapter->clearIdentity();
         }
 
         if ($result->isValid()) {
-            $authAdapter->setIdentity($result->getIdentity());
+            $this->authAdapter->setIdentity($result->getIdentity());
             return true;
         }
         return false;
     }
 
     public function isLoggedIn() {
-        $authAdapter = new AuthAdapter();
-        if ($authAdapter->hasIdentity()) {
-            return $authAdapter->getIdentity();
+        if ($this->authAdapter->hasIdentity()) {
+            return $this->authAdapter->getIdentity();
         }
         return false;
     }
 
     public function logout() {
-        $authAdapter = new AuthAdapter();
-        $authAdapter->clearIdentity();
+        $this->authAdapter->clearIdentity();
+    }
+
+    public function getIdentity() {
+        return $this->authAdapter->getIdentity();
     }
 }

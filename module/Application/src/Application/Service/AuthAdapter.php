@@ -40,7 +40,7 @@ class AuthAdapter implements AdapterInterface
         $result = array(
             'code'  => Result::FAILURE,
             'identity' => array(
-                'username' => $this->userName,
+                'userName' => $this->userName,
             ),
             'messages' => array()
         );
