@@ -123,11 +123,11 @@ CREATE TABLE report(
   PRIMARY KEY (id))
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin;
 
-INSERT INTO user VALUES (1, 'Fritz', 'Abrante', 1,'fritz.abrante@gmail.com','pass01', 1, '2012-07-02', NULL);
-INSERT INTO user VALUES (2, 'Juan', 'Aparicio', 1,'jaun.aparicio@gmail.com','pass01', 1, '2012-07-02', NULL);
-INSERT INTO user VALUES (3, 'Felipe', 'Engel', 1,'felipe.engel@gmail.com','pass01', 1, '2012-07-02', NULL);
-INSERT INTO user VALUES (4, 'Enrique', 'Arroba', 1,'enrique.arroba@gmail.com','pass01', 1, '2012-07-02', NULL);
-INSERT INTO user VALUES (5, 'Orielisa', 'Carapaica', 1,'orielisa@gmail.com','pass01', 1, '2012-07-02', NULL);
+INSERT INTO user VALUES (1, 'xx', 'xx', 1,'xxxxe@gmail.com','pass01', 1, '2012-07-02', NULL);
+INSERT INTO user VALUES (2, 'xx', 'xx', 1,'jxxxx@gmail.com','pass01', 1, '2012-07-02', NULL);
+INSERT INTO user VALUES (3, 'xx', 'xx', 1,'xxxx@gmail.com','pass01', 1, '2012-07-02', NULL);
+INSERT INTO user VALUES (4, 'xx', 'xx', 1,'xxxxx@gmail.com','pass01', 1, '2012-07-02', NULL);
+INSERT INTO user VALUES (5, 'xx', 'xx', 1,'xxxxx@gmail.com','pass01', 1, '2012-07-02', NULL);
 
 
 
